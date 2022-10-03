@@ -6,14 +6,12 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => { //✔️ 
   // find all categories
   // be sure to include its associated Products
-  // GET user info
   Category.findAll()
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
-
 });
 
 router.get('/:id', (req, res) => { //✔️ 
@@ -91,7 +89,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     },
   })
-    .then(category => res.status(200).json(category))
+    .then(dbCategoryData => res.status(200).json(dbCategoryData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
