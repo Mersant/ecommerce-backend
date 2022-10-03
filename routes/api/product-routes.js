@@ -126,7 +126,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     },
   })
-    .then(dbProductData => res.status(200).json(dbProductData))
+    .then(tag => res.status(200).json(tag))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
