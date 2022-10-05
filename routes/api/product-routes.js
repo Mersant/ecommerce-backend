@@ -25,11 +25,12 @@ router.get('/:id', (req, res) => {
     },
   })
     .then(dbCategoryData => {
+      // Ensure there is a matching product with this id
       if (!dbCategoryData) {
         res.status(404).json({ message: 'No product found with this id' });
         return;
       }
-
+      
       ProductTag.findAll({
         where: {
           product_id: req.params.id

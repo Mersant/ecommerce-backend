@@ -65,6 +65,7 @@ router.put('/:id', (req, res) => {
     },
   })
     .then(dbCategoryData => {
+      // Ensure there is a matching category for the given id
       if (!dbCategoryData) {
         res.status(404).json({ message: 'No category found with this id' });
         return;
@@ -89,6 +90,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     },
   })
+    // Return empty array if operation was succesful
     .then(dbCategoryData => res.status(200).json(dbCategoryData))
     .catch(err => {
       console.log(err);
