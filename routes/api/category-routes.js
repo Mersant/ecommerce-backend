@@ -59,28 +59,15 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', (req, res) => { 
   // update a category by its `id` value
-  Category.findOne({
-    where: {
-      id: req.params.id
-    },
-  })
-    .then(dbCategoryData => {
-      // Ensure there is a matching category for the given id
-      if (!dbCategoryData) {
-        res.status(404).json({ message: 'No category found with this id' });
-        return;
-      }
-
-      dbCategoryData.update({
-        category_name: req.body.category_name
-      });
-      res.status(200).json(dbCategoryData);
-
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  Category.update(
+    { category_name: req.body.category_name },
+    { where: { id: req.params.id } }
+  )
+  .then((tag) => res.status(200).json(tag))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
