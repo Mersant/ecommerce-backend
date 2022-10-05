@@ -10,7 +10,7 @@ This repository contains the backend for an ecommerce website. It utilizes seque
  * Creating new categories, tags and products
  * Deleting categories, tags and products
  
-A walkthrough demonstration of this program can be found at (https://youtu.be/pqgMioa-HbY)
+A walkthrough demonstration of this program can be found at (https://youtu.be/-CthZ6cQudY)
 
 ## Guidlines for Contributing
 Contributions are not being accepted at this time
