@@ -53,15 +53,28 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update(
-    { tag_name: req.body.tag_name },
-    { where: { id: req.params.id } }
-  )
-  .then((tag) => res.status(200).json(tag))
-  .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-  });
+  Tag.findOne({
+    where: {
+      id: req.params.id
+    },
+  })
+    .then(dbTagData => {
+      // Ensure there is a matching category for the given id
+      if (!dbTagData) {
+        res.status(404).json({ message: 'No tag found with this id' });
+        return;
+      }
+
+      dbTagData.update({
+        tag_name: req.body.tag_name
+      });
+      res.status(200).json(dbTagData);
+
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.delete('/:id', (req, res) => {
